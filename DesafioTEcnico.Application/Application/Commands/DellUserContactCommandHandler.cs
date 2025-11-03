@@ -1,19 +1,19 @@
-﻿using DesafioTEcnico.Data;
-using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Application.interfaces;
+using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class DellUserContactCommandHandler : IRequestHandler<DellUserContactCommand, UserContactModel>
     {
-        private readonly MongoBD _mongoBD;
-        public DellUserContactCommandHandler(MongoBD mongoBD)
+        private readonly InterfaceUserContatctBD _interfaceRepository;
+        public DellUserContactCommandHandler(InterfaceUserContatctBD interfaceRepository)
         {
-            _mongoBD = mongoBD;
+            _interfaceRepository = interfaceRepository;
         }
         async Task<UserContactModel> IRequestHandler<DellUserContactCommand, UserContactModel>.Handle(DellUserContactCommand request, CancellationToken cancellationToken)
         {
-            var userDelet = await _mongoBD.delContactById(request.id);
+            var userDelet = await _interfaceRepository.delContactById(request.id);
             return userDelet;
 
         }        

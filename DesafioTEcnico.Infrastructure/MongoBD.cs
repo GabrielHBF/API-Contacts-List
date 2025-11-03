@@ -1,15 +1,16 @@
-﻿using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Application.interfaces;
+using DesafioTEcnico.Domain;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-
-namespace DesafioTEcnico.Data
+namespace DesafioTEcnico.Infrastructure
 {
-    public class MongoBD
+    public class MongoBD : InterfaceUserContatctBD
     {
         public IMongoDatabase Database { get; }
         private readonly IMongoCollection<UserContactModel> listUsers;
 
         public MongoBD(IConfiguration conf) {
-
+              
             var connectionString = conf.GetConnectionString("StringConection");
             var dataBaseName = conf.GetValue<string>("nameBD");
 
@@ -35,7 +36,7 @@ namespace DesafioTEcnico.Data
             return await listUsers.Find((contact) => contact.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<UserContactModel> upadateContactById(string id, UserContactModel userUpdate)
+        public async Task<UserContactModel> updateContactById(string id, UserContactModel userUpdate)
         {
             var updateContact = await listUsers.FindOneAndReplaceAsync(contact => contact.Id == id, userUpdate);
             return updateContact;
@@ -48,7 +49,7 @@ namespace DesafioTEcnico.Data
             return delContact;
         }
 
-        public async Task<UserContactModel> updateAtributeContact(string id, UserContactModel userContact)
+        public async Task<UserContactModel> updateAttributeContact(string id, UserContactModel userContact)
         {
             var updateContact = userContact;
             await listUsers.ReplaceOneAsync(usercontact => usercontact.Id == id, updateContact);

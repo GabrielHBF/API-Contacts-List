@@ -1,17 +1,16 @@
-﻿using DesafioTEcnico.Data;
-using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using ZstdSharp;
+using DesafioTEcnico.Application.interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class CreateUserContactCommandHandler : IRequestHandler<CreateUserContactCommand, UserContactModel>
     {
-        private readonly MongoBD _mongoBD;
-        public CreateUserContactCommandHandler(MongoBD mongoBD)
+        private readonly InterfaceUserContatctBD _interfaceRepository;
+        public CreateUserContactCommandHandler(InterfaceUserContatctBD interfaceRepository)
         {
-            _mongoBD = mongoBD;
+            _interfaceRepository = interfaceRepository;
         }
         public async Task<UserContactModel> Handle(CreateUserContactCommand request, CancellationToken cancellationToken)
         {
@@ -22,10 +21,9 @@ namespace DesafioTEcnico.Application.Commands
              contactUser.Email = request.UserEmail;
              contactUser.Address = request.Address;
 
-             await _mongoBD.createContactUser(contactUser);
+             await _interfaceRepository.createContactUser(contactUser);
              return contactUser;
          
-
         }
     }
 

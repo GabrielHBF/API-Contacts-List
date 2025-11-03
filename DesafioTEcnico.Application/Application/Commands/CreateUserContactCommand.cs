@@ -1,4 +1,4 @@
-﻿using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 

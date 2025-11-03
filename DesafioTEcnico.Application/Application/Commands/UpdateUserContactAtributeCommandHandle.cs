@@ -1,20 +1,19 @@
-﻿using DesafioTEcnico.Data;
-using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Application.interfaces;
+using DesafioTEcnico.Domain;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class UpdateUserContactAtributeCommandHandle : IRequestHandler<UpdateUserContactAtributeCommand, UserContactModel>
     {
-        private readonly MongoBD _mongoBD;
-        public UpdateUserContactAtributeCommandHandle(MongoBD mongoBD)
+        private readonly InterfaceUserContatctBD _interfaceRepository;
+        public UpdateUserContactAtributeCommandHandle(InterfaceUserContatctBD interfaceRepository)
         {
-            _mongoBD = mongoBD;
+            _interfaceRepository = interfaceRepository;
         }
         public async Task<UserContactModel> Handle(UpdateUserContactAtributeCommand request, CancellationToken cancellationToken)
         {
-           var updateContactUser = await _mongoBD.getContactById(request.id);
+           var updateContactUser = await _interfaceRepository.getContactById(request.id);
             if(updateContactUser == null)
             {
                 return null;
@@ -41,7 +40,7 @@ namespace DesafioTEcnico.Application.Commands
                 updateContactUser.Phone = request.UserPhone;
             }
 
-            await _mongoBD.updateAtributeContact(request.id, updateContactUser);
+            await _interfaceRepository.updateAttributeContact(request.id, updateContactUser);
             return updateContactUser;
         }
     }

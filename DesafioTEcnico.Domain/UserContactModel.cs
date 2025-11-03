@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DesafioTEcnico.Models
+namespace DesafioTEcnico.Domain
 {
     public class UserContactModel
     {

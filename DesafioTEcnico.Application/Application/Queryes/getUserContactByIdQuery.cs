@@ -1,5 +1,5 @@
-﻿using DesafioTEcnico.Data;
-using DesafioTEcnico.Models;
+﻿using DesafioTEcnico.Application.interfaces;
+using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Queryes
@@ -12,16 +12,16 @@ namespace DesafioTEcnico.Application.Queryes
 
         public class getUserContactByIdQueryHandler : IRequestHandler<getUserContactByIdQuery, UserContactModel>
         {
-            private readonly MongoBD _mongoDB;
+        private readonly InterfaceUserContatctBD _interfaceRepository;
 
-            public getUserContactByIdQueryHandler(MongoBD mongoDB)
+        public getUserContactByIdQueryHandler(InterfaceUserContatctBD interfaceRepository)
             {
-                this._mongoDB = mongoDB;
+                this._interfaceRepository = interfaceRepository;
             }
 
             public async Task<UserContactModel> Handle(getUserContactByIdQuery request, CancellationToken cancellationToken)
             {
-                var user = await _mongoDB.getContactById(request.UserId);
+                var user = await _interfaceRepository.getContactById(request.UserId);
                 return user;
             }
 

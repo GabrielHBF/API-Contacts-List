@@ -1,11 +1,8 @@
 ﻿using DesafioTEcnico.Application.Commands;
 using DesafioTEcnico.Application.Queryes;
-using DesafioTEcnico.Data;
-using DesafioTEcnico.Models;
+using DesafioTEcnico.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
 
 namespace DesafioTEcnico.Controllers
 {
@@ -14,12 +11,10 @@ namespace DesafioTEcnico.Controllers
     public class UserContactController : ControllerBase
     {
         private readonly IMediator _mediatR;
-        private readonly MongoBD mongoBD;
-
-        public UserContactController(IMediator mediatR, MongoBD mongo)
+     
+        public UserContactController(IMediator mediatR)
         {
             this._mediatR = mediatR;
-            this.mongoBD = mongo;
         }
 
         [HttpGet]

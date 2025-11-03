@@ -1,18 +1,19 @@
-using DesafioTEcnico.Data;
-using DotNetEnv;
+
+using DesafioTEcnico.Application.interfaces;
+using DesafioTEcnico.Application.Queryes;
+using DesafioTEcnico.Infrastructure;
 using System.Xml.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<MongoBD>();
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //signing up for the library MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(getAllUserContactQuery).Assembly));
+builder.Services.AddScoped<InterfaceUserContatctBD, MongoBD>();
 
 var app = builder.Build();
 
