@@ -20,7 +20,7 @@ namespace DesafioTEcnico.Controllers
         [HttpGet]
         public async Task<IActionResult> getUsers()
         {
-            var query = new getAllUserContactQuery();
+            var query = new GetAllUserContactQuery();
 
             List<UserContactModel> usersList =  await _mediatR.Send(query);
             return Ok(usersList);
@@ -29,7 +29,7 @@ namespace DesafioTEcnico.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getUserByID(string id)
         {
-            var query = new getUserContactByIdQuery();
+            var query = new GetUserContactByIdQuery();
 
             query.UserId = id;
 
@@ -47,7 +47,7 @@ namespace DesafioTEcnico.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> updateUserContact(string id, [FromBody] UpdateUserContactCommand command)
         {
-            command.id = id;
+            command.Id = id;
             var updateContact = await _mediatR.Send(command);
             return Ok(updateContact);
         }
@@ -55,7 +55,7 @@ namespace DesafioTEcnico.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> updateAtributeContact(string id, [FromBody] UpdateUserContactAtributeCommand command)
         {
-           command.id = id;
+           command.Id = id;
            var updateAtributeContact = await _mediatR.Send(command);
            return Ok(updateAtributeContact);
         }

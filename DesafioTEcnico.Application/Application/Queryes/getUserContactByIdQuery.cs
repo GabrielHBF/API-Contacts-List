@@ -1,25 +1,24 @@
-﻿using DesafioTEcnico.Application.interfaces;
-using DesafioTEcnico.Domain;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Queryes
 {
-    public class getUserContactByIdQuery : IRequest <UserContactModel>
+    public class GetUserContactByIdQuery : IRequest <UserContactModel>
     {
             public string UserId { get; set; }
 
     }
 
-        public class getUserContactByIdQueryHandler : IRequestHandler<getUserContactByIdQuery, UserContactModel>
+        public class GetUserContactByIdQueryHandler : IRequestHandler<GetUserContactByIdQuery, UserContactModel>
         {
-        private readonly InterfaceUserContatctBD _interfaceRepository;
+        private readonly InterfaceRepository _interfaceRepository;
 
-        public getUserContactByIdQueryHandler(InterfaceUserContatctBD interfaceRepository)
+        public GetUserContactByIdQueryHandler(InterfaceRepository interfaceRepository)
             {
                 this._interfaceRepository = interfaceRepository;
             }
 
-            public async Task<UserContactModel> Handle(getUserContactByIdQuery request, CancellationToken cancellationToken)
+            public async Task<UserContactModel> Handle(GetUserContactByIdQuery request, CancellationToken cancellationToken)
             {
                 var user = await _interfaceRepository.getContactById(request.UserId);
                 return user;

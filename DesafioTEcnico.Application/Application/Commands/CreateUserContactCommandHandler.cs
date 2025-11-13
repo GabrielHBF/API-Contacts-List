@@ -1,14 +1,12 @@
-﻿using DesafioTEcnico.Domain;
-using MediatR;
-using DesafioTEcnico.Application.interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
+using DesafioTEcnico.Domain;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class CreateUserContactCommandHandler : IRequestHandler<CreateUserContactCommand, UserContactModel>
     {
-        private readonly InterfaceUserContatctBD _interfaceRepository;
-        public CreateUserContactCommandHandler(InterfaceUserContatctBD interfaceRepository)
+        private readonly InterfaceRepository _interfaceRepository;
+        public CreateUserContactCommandHandler(InterfaceRepository interfaceRepository)
         {
             _interfaceRepository = interfaceRepository;
         }

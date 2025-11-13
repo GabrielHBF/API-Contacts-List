@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DesafioTEcnico.Domain
 {
-    public class UserContactModel
+    public record UserContactModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

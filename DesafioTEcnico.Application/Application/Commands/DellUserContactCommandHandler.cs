@@ -1,13 +1,12 @@
-﻿using DesafioTEcnico.Application.interfaces;
-using DesafioTEcnico.Domain;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class DellUserContactCommandHandler : IRequestHandler<DellUserContactCommand, UserContactModel>
     {
-        private readonly InterfaceUserContatctBD _interfaceRepository;
-        public DellUserContactCommandHandler(InterfaceUserContatctBD interfaceRepository)
+        private readonly InterfaceRepository _interfaceRepository;
+        public DellUserContactCommandHandler(InterfaceRepository interfaceRepository)
         {
             _interfaceRepository = interfaceRepository;
         }

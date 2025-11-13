@@ -1,15 +1,14 @@
-﻿using DesafioTEcnico.Application.interfaces;
-using DesafioTEcnico.Domain;
+﻿using DesafioTEcnico.Domain;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 namespace DesafioTEcnico.Infrastructure
 {
-    public class MongoBD : InterfaceUserContatctBD
+    public class Repository : InterfaceRepository
     {
         public IMongoDatabase Database { get; }
         private readonly IMongoCollection<UserContactModel> listUsers;
 
-        public MongoBD(IConfiguration conf) {
+        public Repository(IConfiguration conf) {
               
             var connectionString = conf.GetConnectionString("StringConection");
             var dataBaseName = conf.GetValue<string>("nameBD");

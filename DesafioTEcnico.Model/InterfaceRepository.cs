@@ -1,13 +1,12 @@
-﻿using DesafioTEcnico.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesafioTEcnico.Application.interfaces
+namespace DesafioTEcnico.Domain
 {
-     public interface InterfaceUserContatctBD
+     public interface InterfaceRepository
     {
          Task<List<UserContactModel>> getListContact();
          Task createContactUser(UserContactModel newUserContact);

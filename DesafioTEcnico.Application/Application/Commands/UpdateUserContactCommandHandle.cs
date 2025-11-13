@@ -1,13 +1,12 @@
-﻿using DesafioTEcnico.Application.interfaces;
-using DesafioTEcnico.Domain;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class UpdateUserContactCommandHandle : IRequestHandler<UpdateUserContactCommand, UserContactModel>
     {
-        private readonly InterfaceUserContatctBD _interfaceRepository;
-        public UpdateUserContactCommandHandle(InterfaceUserContatctBD interfaceRepository)
+        private readonly InterfaceRepository _interfaceRepository;
+        public UpdateUserContactCommandHandle(InterfaceRepository interfaceRepository)
         {
             _interfaceRepository = interfaceRepository;
         }
@@ -15,14 +14,14 @@ namespace DesafioTEcnico.Application.Commands
         {
             var updateUserContact = new UserContactModel
             {
-                Id = request.id,
+                Id = request.Id,
                 Email = request.UserEmail,
                 Phone = request.UserPhone,
                 Address = request.Address,
                 BirthDate = request.BirthDate,
             };
 
-            await _interfaceRepository.updateContactById(request.id, updateUserContact);
+            await _interfaceRepository.updateContactById(request.Id, updateUserContact);
             return updateUserContact;
         }
     }

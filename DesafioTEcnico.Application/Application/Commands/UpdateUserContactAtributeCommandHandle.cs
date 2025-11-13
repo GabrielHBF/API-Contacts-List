@@ -1,19 +1,18 @@
-﻿using DesafioTEcnico.Application.interfaces;
-using DesafioTEcnico.Domain;
+﻿using DesafioTEcnico.Domain;
 using MediatR;
 
 namespace DesafioTEcnico.Application.Commands
 {
     public class UpdateUserContactAtributeCommandHandle : IRequestHandler<UpdateUserContactAtributeCommand, UserContactModel>
     {
-        private readonly InterfaceUserContatctBD _interfaceRepository;
-        public UpdateUserContactAtributeCommandHandle(InterfaceUserContatctBD interfaceRepository)
+        private readonly InterfaceRepository _interfaceRepository;
+        public UpdateUserContactAtributeCommandHandle(InterfaceRepository interfaceRepository)
         {
             _interfaceRepository = interfaceRepository;
         }
         public async Task<UserContactModel> Handle(UpdateUserContactAtributeCommand request, CancellationToken cancellationToken)
         {
-           var updateContactUser = await _interfaceRepository.getContactById(request.id);
+           var updateContactUser = await _interfaceRepository.getContactById(request.Id);
             if(updateContactUser == null)
             {
                 return null;
@@ -40,7 +39,7 @@ namespace DesafioTEcnico.Application.Commands
                 updateContactUser.Phone = request.UserPhone;
             }
 
-            await _interfaceRepository.updateAttributeContact(request.id, updateContactUser);
+            await _interfaceRepository.updateAttributeContact(request.Id, updateContactUser);
             return updateContactUser;
         }
     }
