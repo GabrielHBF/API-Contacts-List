@@ -15,6 +15,7 @@ namespace DesafioTEcnico.Application.Commands
             var updateUserContact = new UserContactModel
             {
                 Id = request.Id,
+                Name = request.UserName,
                 Email = request.UserEmail,
                 Phone = request.UserPhone,
                 Address = request.Address,

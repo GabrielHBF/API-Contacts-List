@@ -18,7 +18,7 @@ namespace DesafioTEcnico.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> getUsers()
+        public async Task<IActionResult> GetUsers()
         {
             var query = new GetAllUserContactQuery();
 
@@ -27,7 +27,7 @@ namespace DesafioTEcnico.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> getUserByID(string id)
+        public async Task<IActionResult> GetUserByID(string id)
         {
             var query = new GetUserContactByIdQuery();
 
@@ -38,14 +38,14 @@ namespace DesafioTEcnico.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> createNewUser([FromBody] CreateUserContactCommand command)
+        public async Task<IActionResult> CreateNewUser([FromBody] CreateUserContactCommand command)
         {
             var createContact = await _mediatR.Send(command);
             return Ok(createContact);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> updateUserContact(string id, [FromBody] UpdateUserContactCommand command)
+        public async Task<IActionResult> UpdateUserContact(string id, [FromBody] UpdateUserContactCommand command)
         {
             command.Id = id;
             var updateContact = await _mediatR.Send(command);
@@ -53,7 +53,7 @@ namespace DesafioTEcnico.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> updateAtributeContact(string id, [FromBody] UpdateUserContactAtributeCommand command)
+        public async Task<IActionResult> UpdateAtributeContact(string id, [FromBody] UpdateUserContactAtributeCommand command)
         {
            command.Id = id;
            var updateAtributeContact = await _mediatR.Send(command);
@@ -61,7 +61,7 @@ namespace DesafioTEcnico.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteUserContact(string id,DellUserContactCommand command)
+        public async Task<IActionResult> DeleteUserContact(string id,DellUserContactCommand command)
         {
             command.id = id;
             var deleteUserContact = await _mediatR.Send(command);

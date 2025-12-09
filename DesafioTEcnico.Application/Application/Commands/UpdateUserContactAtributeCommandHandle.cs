@@ -13,20 +13,21 @@ namespace DesafioTEcnico.Application.Commands
         public async Task<UserContactModel> Handle(UpdateUserContactAtributeCommand request, CancellationToken cancellationToken)
         {
            var updateContactUser = await _interfaceRepository.getContactById(request.Id);
+
             if(updateContactUser == null)
             {
                 return null;
             }
   
-            if (request.UserName != null)
+            if (!string.IsNullOrEmpty(request.UserName) && request.UserName != "string")
             {
                 updateContactUser.Name = request.UserName;
             }
-            if (request.Address != null)
+            if (request.Address != null && request.Address.Count > 0 && request.Address[0] != "string")
             {
                 updateContactUser.Address = request.Address;
             }
-            if (request.UserEmail != null)
+            if (!string.IsNullOrEmpty(request.UserEmail) && request.UserEmail != "string")
             {
                 updateContactUser.Email = request.UserEmail;
             }
@@ -34,7 +35,7 @@ namespace DesafioTEcnico.Application.Commands
             {
                 updateContactUser.BirthDate = request.BirthDate;
             }
-            if (request.UserPhone != null)
+            if (!string.IsNullOrEmpty(request.UserPhone) && request.UserPhone != "string")
             {
                 updateContactUser.Phone = request.UserPhone;
             }
