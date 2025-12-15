@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DesafioTEcnico.Domain
+namespace DesafioTEcnico.Domain.Entities
 {
-    public record UserContactModel
+    public record ContactEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
